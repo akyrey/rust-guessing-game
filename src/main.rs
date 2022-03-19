@@ -1,4 +1,6 @@
 use std::io;
+// This is an enum type with variants Less, Greater and Equal
+use std::cmp::Ordering;
 // This is a trait
 use rand::Rng;
 
@@ -26,5 +28,14 @@ fn main() {
         // If Result is an Err variant, expect method will cause the program to crash and display the message
         .expect("Failed to read line");
 
+    // This shadows the previous variable
+    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+
     println!("You guess: {}", guess);
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
 }
