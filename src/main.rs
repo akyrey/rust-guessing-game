@@ -11,8 +11,6 @@ fn main() {
     // Range is inclusive of the lower bound but exclusive of the upper bound (same as 1..=100)
     let secret_number = rand::thread_rng().gen_range(1..101);
 
-    println!("The secret number is {}", secret_number);
-
     loop {
         println!("Please input your guess.");
 
