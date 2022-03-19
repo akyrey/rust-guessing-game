@@ -13,29 +13,34 @@ fn main() {
 
     println!("The secret number is {}", secret_number);
 
-    println!("Please input your guess.");
+    loop {
+        println!("Please input your guess.");
 
-    // Rust variables are declared using "let" and are immutable by default. Using "mut" will make the mutable
-    // new is an "associated function" implemented for type String
-    let mut guess = String::new();
+        // Rust variables are declared using "let" and are immutable by default. Using "mut" will make the mutable
+        // new is an "associated function" implemented for type String
+        let mut guess = String::new();
 
-    // Returns io::Stdin
-    io::stdin()
-        // Read input value and append it to guess variable using a reference (&)
-        // References as variables are immutable by default
-        // Returns io::Result, an enum with variants Ok and Err
-        .read_line(&mut guess)
-        // If Result is an Err variant, expect method will cause the program to crash and display the message
-        .expect("Failed to read line");
+        // Returns io::Stdin
+        io::stdin()
+            // Read input value and append it to guess variable using a reference (&)
+            // References as variables are immutable by default
+            // Returns io::Result, an enum with variants Ok and Err
+            .read_line(&mut guess)
+            // If Result is an Err variant, expect method will cause the program to crash and display the message
+            .expect("Failed to read line");
 
-    // This shadows the previous variable
-    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        // This shadows the previous variable
+        let guess: u32 = guess.trim().parse().expect("Please type a number!");
 
-    println!("You guess: {}", guess);
+        println!("You guess: {}", guess);
 
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
     }
 }
