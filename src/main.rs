@@ -1,7 +1,15 @@
 use std::io;
+// This is a trait
+use rand::Rng;
 
 fn main() {
     println!("Guess the number!");
+
+    // Use a local to the current thread of execution generator seeded by os
+    // Range is inclusive of the lower bound but exclusive of the upper bound (same as 1..=100)
+    let secret_number = rand::thread_rng().gen_range(1..101);
+
+    println!("The secret number is {}", secret_number);
 
     println!("Please input your guess.");
 
