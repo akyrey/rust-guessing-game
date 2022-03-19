@@ -1,3 +1,22 @@
+use std::io;
+
 fn main() {
-    println!("Hello, world!");
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    // Rust variables are declared using "let" and are immutable by default. Using "mut" will make the mutable
+    // new is an "associated function" implemented for type String
+    let mut guess = String::new();
+
+    // Returns io::Stdin
+    io::stdin()
+        // Read input value and append it to guess variable using a reference (&)
+        // References as variables are immutable by default
+        // Returns io::Result, an enum with variants Ok and Err
+        .read_line(&mut guess)
+        // If Result is an Err variant, expect method will cause the program to crash and display the message
+        .expect("Failed to read line");
+
+    println!("You guess: {}", guess);
 }
